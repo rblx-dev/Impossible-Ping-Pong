@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Ping Pong</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3db05;
+            font-family: Arial, sans-serif;
+        }
+        #gameCanvas {
+            border: 4px solid #333;
+            background-color: #222;
+        }
+        #scoreBoard {
+            position: absolute;
+            top: 20px;
+            font-size: 24px;
+            color: #ff0505;
+        }
+    </style>
+</head>
+<body>
+    <div id="scoreBoard">Player: 0 | Computer: 0</div>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    
+    <!-- Add these audio elements -->
+    <audio id="paddleHitSound" src="https://assets.mixkit.co/sfx/preview/mixkit-game-ball-tap-2073.mp3"></audio>
+    <audio id="wallHitSound" src="https://assets.mixkit.co/sfx/preview/mixkit-quick-jump-arcade-game-239.mp3"></audio>
+    <audio id="scoreSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-complete-or-approved-mission-205.mp3"></audio>
+    <audio id="gameOverSound" src="https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.mp3"></audio>
+    
+    <script src="game.js"></script>
+</body>
+</html>
