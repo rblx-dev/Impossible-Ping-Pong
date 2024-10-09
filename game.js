@@ -29,9 +29,7 @@ const gameOverSound = document.getElementById('gameOverSound');
 
 // Computer AI variables
 let computerTargetY = computerY;
-let computerReactionDelay = 0;
-let computerMistakeChance = 0.1;
-let computerMistakeAmount = 0;
+const computerSpeed = 60; // Adjust this value to change the computer's responsiveness
 
 function playSound(audio) {
     audio.currentTime = 0;
@@ -69,30 +67,28 @@ function applyRandomBounce() {
     ballVelocityY = Math.sin(randomAngle) * currentSpeed;
 }
 
-function updateComputerPaddle() {
-    if (computerReactionDelay > 0) {
-        computerReactionDelay--;
-        return;
-    }
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+}
 
+function updateComputerPaddle() {
     // Update target position
     computerTargetY = ballY - paddleHeight / 2;
-
-    // Add some randomness to make it seem more human-like
-    if (Math.random() < computerMistakeChance) {
-        computerMistakeAmount = (Math.random() - 0.5) * paddleHeight;
-    }
-    computerTargetY += computerMistakeAmount;
 
     // Clamp target position to keep it on screen
     computerTargetY = Math.max(0, Math.min(canvas.height - paddleHeight, computerTargetY));
 
-    // Move towards target position
+    // Calculate the distance to the target
     const diff = computerTargetY - computerY;
-    computerY += diff * 0.1; // Smooth movement
 
-    // Set a new reaction delay
-    computerReactionDelay = Math.floor(Math.random() * 10);
+    // Apply easing to the movement
+    const easedDiff = diff * easeOutCubic(computerSpeed);
+
+    // Move towards target position
+    computerY += easedDiff;
+
+    // Ensure the paddle stays within the canvas bounds
+    computerY = Math.max(0, Math.min(canvas.height - paddleHeight, computerY));
 }
 
 function updateGame() {
