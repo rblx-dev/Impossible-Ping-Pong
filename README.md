@@ -1,3 +1,5 @@
+## THIS GAME IS VERY RIGGED
+
 # Unbeatable Ping Pong Game
 
 ## Description
